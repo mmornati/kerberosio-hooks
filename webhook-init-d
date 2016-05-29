@@ -1,0 +1,27 @@
+## BEGIN INIT INFO
+# Provides:             webhook
+# Required-Start:
+# Required-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    WebHook Node App
+### END INIT INFO
+
+#export PATH=$PATH:/opt/node/bin
+export NODE_PATH=$NODE_PATH:/home/pi/kbios-listener/node_modules
+export HOME=/home/pi 
+
+case "$1" in
+  start)
+    /usr/local/bin/forever -p /home/pi/.forever start /home/pi/kbios-listener/webhook.js
+    ;;
+  stop)
+    exec /usr/local/bin/forever stopall
+    ;;
+  *)
+
+  echo "Usage: /etc/init.d/webhook {start|stop}"
+  exit 1
+  ;;
+esac
+exit 0
