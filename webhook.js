@@ -1,14 +1,10 @@
 //Lets require/import the HTTP module
 var http = require('http');
-var PushBullet = require('pushbullet');
-var pusher = new PushBullet('your-key');
 var dispatcher = require('httpdispatcher');
-var moment = require('moment');
+var routes = require('./routes');
 
 //Lets define a port we want to listen to
 const PORT=8080;
-
-const BASE_URL="https://yourserver.net/"
 
 //We need a function which handles requests and send response
 function handleRequest(request, response){
@@ -22,25 +18,28 @@ function handleRequest(request, response){
     }
 }
 
-dispatcher.onGet("/kerberosio", function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Get Hook');
-});    
 
-//A sample POST request
-dispatcher.onPost("/kerberosio", function(req, res) {
-    console.log(req.body);
-    pusher.devices(function(error, response) {
-       var devices = response.devices;
-       devices.forEach(function(device) {
-           var receivedData = JSON.parse(req.body);
-           var message = "Motion detected at home! " + moment.unix(receivedData.timestamp).format("MM/DD/YYYY") + " Check it here " + BASE_URL + receivedData.pathToImage;
-           pusher.note(device.device_iden, "Kerberos.io: Motion Detected", message);
-       });
-    });
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Got Post Data');
-});
+//GET Methods
+var get_array = routes.routes["GET"];
+for (var key in get_array) {
+  if (!get_array.hasOwnProperty(key)) {
+    continue;
+  }
+  dispatcher.onGet(key, function(req, res) {
+      get_array[key](req, res);
+  });
+}
+
+//POST Methods
+var post_array = routes.routes["POST"];
+for (var key in get_array) {
+  if (!get_array.hasOwnProperty(key)) {
+    continue;
+  }
+  dispatcher.onPost(key, function(req, res) {
+      post_array[key](req, res);
+  });
+}
 
 //Create a server
 var server = http.createServer(handleRequest);

@@ -12,6 +12,7 @@
     "date-utils": "^1.2.21",
     "http": "0.0.0",
     "httpdispatcher": "^1.0.0",
-    "pushbullet": "^1.4.3"
+    "pushbullet": "^1.4.3",
+    "moment": "~2.15.1"
   }
 }
