@@ -18,20 +18,36 @@ npm install
 ```
 
 ## Configuration
-To activate the Pushbullet fonctionality you need to configure inside the scripts your pushballet key (you can create one in your pushbullet account page).
-Edit the **listener.js** file and/or the **webhook.js** one and change the following line:
+To activate the Pushbullet functionality you need to configure into the pushballet plugin, the service API key (you can create one in your pushbullet account page).
+Edit the **plugins/pushbullet/config.js** file one and change the following line:
 
 ```javascript
-var pusher = new PushBullet('your-key');
+define('KEY', 'test');
 ```
 
 replacing ''your-key'' with the Pushbullet key.
+
+You can then configure some other parameters used by the plugin:
+```javascript
+define('IMAGES_BASE_URL', 'https://media.home.mornati.net/');
+define('IMAGES_BASE_PATH', '/mnt/kerberosio/machinery/capture/');
+define('IMAGE_METHOD', 'PATH');
+```
+
+* IMAGES_BASE_URL: used as base image path to upload the image to pushbullet (the url should be accessible from internet).
+* IMAGES_BASE_PATH: local path where Kerberos.io images are stored.
+* IMAGE_METHOD: which method you want to use to upload the image to pushbullet (PATH/URL). The default is the local PATH.
+
+```javascript
+define('DEVICE_ID', undefined);
+```
+If you want to notify only one device, you can configure the Pushbullet device id here.
 
 ## TCP Listener Usage
 To start the TCP Lisner you can simply use the following command:
 
 ```bash
-node listener.js 
+node listener.js
 ```
 
 A server will be started on **1337** port and you can configure it into your kerberos.io server configuration.
