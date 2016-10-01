@@ -1,4 +1,7 @@
 language: node_js
+addons:
+    code_climate:
+        repo_token: c4c3e854f0f244cbe497d1c26655a0e65ee3c71632de58d07a8090fffda0a41c
 node_js:
   - "6"
 
@@ -9,4 +12,5 @@ before_script:
   - npm install -g mocha
 
 after_success:
+  - npm run cover
   - codeclimate-test-reporter < coverage/lcov.info
