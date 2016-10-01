@@ -14,5 +14,8 @@
     "httpdispatcher": "^1.0.0",
     "pushbullet": "^1.4.3",
     "moment": "~2.15.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.3"
   }
 }
