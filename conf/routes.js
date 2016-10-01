@@ -22,5 +22,4 @@ for (var i=0; i<config.activated_plugins.length; i++) {
     }
   }
 }
-
 module.exports.routes = routes;
