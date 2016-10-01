@@ -6,11 +6,3 @@ node_js:
 
 install:
   - npm install
-
-before_script:
-  - node webhook.js &
-
-script:
-  - curl http://127.0.0.1:8080/kerberosio | grep "GET call for PushuBullet is not supported"
-
-#after_script:

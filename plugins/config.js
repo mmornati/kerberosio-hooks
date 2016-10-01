@@ -1,12 +1,5 @@
 var configPrototype = {
-  name: "abstract module name",
-  define: function (name, value) {
-    Object.defineProperty(exports, name, {
-        value:      value,
-        enumerable: true
-    });
-  }
+  "name": undefined
+};
 
-}
-
-module.exports.configPrototype = configPrototype;
+module.exports.configPrototype=configPrototype;

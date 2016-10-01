@@ -11,6 +11,6 @@ var routes = [
     "type": "POST",
     "code": plugin.post
   },
-]
+];
 
 module.exports.routes = routes;

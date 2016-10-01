@@ -2,9 +2,10 @@
   "name": "kerberosio-hooks",
   "version": "1.0.0",
   "description": "",
-  "main": "webhook.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive",
+    "cover": "istanbul cover _mocha -- --recursive"
   },
   "author": "Marco Mornati",
   "license": "GPLv3",
@@ -12,13 +13,15 @@
     "date-utils": "^1.2.21",
     "http": "0.0.0",
     "httpdispatcher": "^1.0.0",
+    "moment": "~2.15.1",
     "pushbullet": "^1.4.3",
-    "moment": "~2.15.1"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "jshint": "^2.9.3"
-  }
-  "scripts": {
-    "test": "./node_modules/jshint/bin/jshint webhook.js"
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "jshint": "^2.9.3",
+    "mocha-jshint": "^2.3.1",
+    "request": "^2.75.0"
   }
 }
