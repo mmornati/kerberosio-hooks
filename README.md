@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mmornati/kerberosio-hooks.svg?branch=master)](https://travis-ci.org/mmornati/kerberosio-hooks)[![Code Climate](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/gpa.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks)[![Issue Count](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/issue_count.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks)
+
 # kerberosio-hooks
 Kerberos.io WebHooks and Listener to push messages on Pushbullet
 
