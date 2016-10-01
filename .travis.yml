@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "6"
+before_install:
+  - npm install -g forever
+
+install:
+  - npm install
+
+before_script:
+  - forever start webhook.js
+
+script:
+  - curl http://localhost:8080/kerberosio | grep "GET call for PushuBullet is not supported"
+
+after_script:
+  - forever stopall
+  - rm -rf ~/.forever
