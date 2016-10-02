@@ -2,12 +2,12 @@ var plugin = require('./index');
 
 var routes = [
   {
-    "url": "/kerberosio",
+    "url": "/pushbullet",
     "type": "GET",
     "code": plugin.get
   },
   {
-    "url": "/kerberosio",
+    "url": "/pushbullet",
     "type": "POST",
     "code": plugin.post
   },

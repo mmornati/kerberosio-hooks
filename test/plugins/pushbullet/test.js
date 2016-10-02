@@ -10,7 +10,7 @@ describe('Pushbullet Plugin', function () {
 
   it('GET Method should return 200', function (done) {
     var options = {
-      url: 'http://localhost:8000/kerberosio',
+      url: 'http://localhost:8000/pushbullet',
       headers: {
         'Content-Type': 'text/plain'
       }
@@ -24,7 +24,7 @@ describe('Pushbullet Plugin', function () {
 
   it('POST Method should return 200', function (done) {
     var options = {
-      url: 'http://localhost:8000/kerberosio',
+      url: 'http://localhost:8000/pushbullet',
       headers: {
         'Content-Type': 'application/json'
       },

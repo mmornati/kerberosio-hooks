@@ -1,5 +1,6 @@
 {
   "server_port": 8080,
+  "server_main_path": "/kerberosio",
   "activated_plugins": ["pushbullet"],
 
   "pushbullet_key": "test",
