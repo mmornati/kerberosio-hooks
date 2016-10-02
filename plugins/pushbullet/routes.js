@@ -1,16 +1,12 @@
 var plugin = require('./index');
+var AbstractRoutes = require('../routes');
 
-var routes = [
-  {
-    "url": "/pushbullet",
-    "type": "GET",
-    "code": plugin.get
-  },
-  {
-    "url": "/pushbullet",
-    "type": "POST",
-    "code": plugin.post
-  },
-];
+class PushBulletRoutes extends AbstractRoutes {
 
-module.exports.routes = routes;
+  constructor() {
+    super('/pushbullet', plugin.get, plugin.post);
+  }
+
+}
+
+module.exports = PushBulletRoutes;

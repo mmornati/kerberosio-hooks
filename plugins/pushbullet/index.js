@@ -1,12 +1,15 @@
 var _ = require('underscore');
-var config = _.extend(require('config'), require('./config'));
+var config = require('config');
+var pluginConfig = require('./config');
 var PushBullet = require('pushbullet');
 var pusher = new PushBullet(config.pushbullet_key);
 var moment = require('moment');
 
+var PushBulletConfig = new pluginConfig();
+
 function getMethod(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('GET call for ' + config.pluginConfig.name + ' is not supported. Use POST instead');
+  res.end('GET call for ' + PushBulletConfig.getName() + ' is not supported. Use POST instead');
 }
 
 function postMethod(req,res) {

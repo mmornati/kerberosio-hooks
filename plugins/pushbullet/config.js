@@ -1,6 +1,11 @@
-var abstractConfig = require('../config');
+var AbstractConfiguration = require('../config');
 
-var pluginConfig = Object.create(abstractConfig.configPrototype);
-pluginConfig.name = "PushuBullet";
+class PushBulletConfig extends AbstractConfiguration {
 
-module.exports.pluginConfig = pluginConfig;
+  constructor() {
+    super("PushBullet");
+  }
+
+}
+
+module.exports = PushBulletConfig;

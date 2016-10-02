@@ -1,11 +1,23 @@
 {
   "server_port": 8080,
   "server_main_path": "/kerberosio",
-  "activated_plugins": ["pushbullet"],
+  "activated_plugins": ["pushbullet", "email"],
 
   "pushbullet_key": "test",
   "device_id": "",
   "images_base_url": "https://media.home.mornati.net/",
   "images_base_path": "/mnt/kerberosio/machinery/capture/",
-  "image_method": "PATH"
+  "image_method": "PATH",
+
+  "plugins": {
+    "email": {
+      "smtp": "smtps://user%40gmail.com:pass@smtp.gmail.com",
+      "data": {
+        "from": "sender@server.com",
+        "to": ["receiver@sender.com"],
+        "subject": "WARNING: Kerberos.io Motion Detected",
+        "text": "A movement was detected by your camera. Check the attachment for more details."
+      }
+    }
+  }
 }

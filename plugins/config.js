@@ -1,5 +1,16 @@
-var configPrototype = {
-  "name": undefined
-};
+class AbstractConfiguration {
 
-module.exports.configPrototype=configPrototype;
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getPluginConfig() {
+    return undefined;
+  }
+}
+
+module.exports = AbstractConfiguration;

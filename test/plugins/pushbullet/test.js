@@ -36,7 +36,7 @@ describe('Pushbullet Plugin', function () {
         throw new Error(error);
       }
       expect(res.statusCode).to.equal(200);
-      expect(res.body).to.equal('GET call for PushuBullet is not supported. Use POST instead');
+      expect(res.body).to.equal('GET call for PushBullet is not supported. Use POST instead');
       done();
     });
   });
