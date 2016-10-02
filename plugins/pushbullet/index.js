@@ -37,7 +37,7 @@ function sendMessage(data, device_id) {
   if (config.image_method == 'URL') {
     image_to_send = config.images_base_url + receivedData.pathToImage;
   } else if (config.image_method == 'PATH') {
-    image_to_send = config.images_base_url + receivedData.pathToImage;
+    image_to_send = config.images_base_path + receivedData.pathToImage;
   }
   pusher.file(device_id, image_to_send, 'Kerberos.io Motion Image', function(error, response) {
     if (response !== undefined) {

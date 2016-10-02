@@ -26,16 +26,18 @@ for (var i=0; i<config.activated_plugins.length; i++) {
 }
 
 //Adding base path to call all active plugins
+function callActiveMethods(method, req, res) {
+  for (var i=0; i<globalMethods[method].length; i++) {
+    globalMethods[method][i](req, res);
+  }
+}
+
 function callAllActivetGet(req, res) {
-    for (var i=0; i<globalMethods.GET.length; i++) {
-      globalMethods.GET[i](req, res);
-    }
+  callActiveMethods("GET", req, res);
 }
 
 function callAllActivetPost(req, res) {
-    for (var i=0; i<globalMethods.POST.length; i++) {
-      globalMethods.POST[i](req, res);
-    }
+  callActiveMethods("POST", req, res);
 }
 
 routes.GET[config.server_main_path] = callAllActivetGet;
