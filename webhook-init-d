@@ -9,11 +9,11 @@
 
 #export PATH=$PATH:/opt/node/bin
 export NODE_PATH=$NODE_PATH:/home/pi/kbios-listener/node_modules
-export HOME=/home/pi 
+export HOME=/home/pi
 
 case "$1" in
   start)
-    /usr/local/bin/forever -p /home/pi/.forever start /home/pi/kbios-listener/webhook.js
+    /usr/local/bin/forever -p /home/pi/.forever start /home/pi/kbios-listener/index.js
     ;;
   stop)
     exec /usr/local/bin/forever stopall
