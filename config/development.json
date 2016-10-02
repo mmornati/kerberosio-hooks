@@ -1,0 +1,5 @@
+{
+  "images_base_path": "./test",
+  "image_method": "PATH",
+  "device_id": "test"
+}

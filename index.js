@@ -1,7 +1,7 @@
 var server = require('./lib/server');
-var settings = require('./conf/config');
+var config = require('config');
 
 //Lets start our server
-server.listen(settings.config.server_port, function(){
-    console.log("Server listening on: http://localhost:%s", settings.config.server_port);
+server.listen(config.server_port, function(){
+    console.log("Server listening on: http://localhost:%s", config.server_port);
 });

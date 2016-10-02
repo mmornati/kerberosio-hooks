@@ -53,7 +53,7 @@ require('mocha-jshint')({
         'test/**/*.js',
         'plugins/*.js',
         'plugins/**/*.js',
-        'conf/*.js',
+        'config/*.js',
         'lib/*.js'
     ]
 });

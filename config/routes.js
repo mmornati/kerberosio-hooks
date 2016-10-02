@@ -1,19 +1,19 @@
-var settings = require('./config');
+var config = require('config');
 
 var pluginsFolder = '../plugins/';
 
 var routes = {"GET": {}, "POST": {}};
 var globalMethods = {"GET": [], "POST": []};
-console.log("Configuring " + settings.config.activated_plugins.length + " plugins...");
-for (var i=0; i<settings.config.activated_plugins.length; i++) {
-  var current_module_config = require(pluginsFolder + settings.config.activated_plugins[i] + "/config.js");
+console.log("Configuring " + config.activated_plugins.length + " plugins...");
+for (var i=0; i<config.activated_plugins.length; i++) {
+  var current_module_config = require(pluginsFolder + config.activated_plugins[i] + "/config.js");
   if (current_module_config.pluginConfig.name === undefined) {
-    console.error('Plugin ' + settings.config.activated_plugins[i] + ' not correctly configured');
+    console.error('Plugin ' + config.activated_plugins[i] + ' not correctly configured');
     continue;
   }
-  var current_module = require(pluginsFolder + settings.config.activated_plugins[i] + "/routes.js");
+  var current_module = require(pluginsFolder + config.activated_plugins[i] + "/routes.js");
   if (current_module === undefined || current_module.routes === undefined) {
-    throw new Error('Missing routes for ' + settings.config.activated_plugins[i] + ' plugin');
+    throw new Error('Missing routes for ' + config.activated_plugins[i] + ' plugin');
   }
   for (var j=0; j<current_module.routes.length; j++) {
     if (routes[current_module.routes[j].type] !== undefined) {
@@ -40,7 +40,7 @@ function callAllActivetPost(req, res) {
   callActiveMethods("POST", req, res);
 }
 
-routes.GET[settings.config.server_main_path] = callAllActivetGet;
-routes.POST[settings.config.server_main_path] = callAllActivetPost;
+routes.GET[config.server_main_path] = callAllActivetGet;
+routes.POST[config.server_main_path] = callAllActivetPost;
 
 module.exports.routes = routes;

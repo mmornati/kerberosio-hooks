@@ -5,7 +5,7 @@
 
   "pushbullet_key": "test",
   "device_id": "",
-  "images_base_url": "https://media.home.mornati.net/'",
+  "images_base_url": "https://media.home.mornati.net/",
   "images_base_path": "/mnt/kerberosio/machinery/capture/",
   "image_method": "PATH"
 }

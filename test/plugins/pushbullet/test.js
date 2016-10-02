@@ -30,7 +30,7 @@ describe('Pushbullet Plugin', function () {
   it('POST Method should return 200', function (done) {
     var testOptions = {
       method: 'POST',
-      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"1474915896_6-808694_home_regionCoordinates_numberOfChanges_268.jpg","instanceName":"home"}
+      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
     };
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {

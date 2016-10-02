@@ -18,7 +18,7 @@ npm install
 ```
 
 ## Configuration
-To use this module you need to configure into the **conf/config.json** file containing basic parameters and all the module's too.
+To use this module you need to configure into the **config/default.json** file containing basic parameters and all the module's too.
 
 ```json
 {
