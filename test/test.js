@@ -3,18 +3,19 @@ var request = require('request');
 var chai = require('chai');
 var expect = chai.expect;
 
+var options = {
+  url: 'http://localhost:8000',
+  headers: {
+    'Content-Type': 'text/plain'
+  }
+};
+
 describe('Base Server', function () {
   before(function () {
     server.listen(8000);
   });
 
   it('should return 404', function (done) {
-    var options = {
-      url: 'http://localhost:8000',
-      headers: {
-        'Content-Type': 'text/plain'
-      }
-    };
     request.get(options, function (err, res, body) {
       expect(res.statusCode).to.equal(404);
       expect(res.body).to.equal('');
@@ -23,12 +24,7 @@ describe('Base Server', function () {
   });
 
   it('GET Method should return 200', function (done) {
-    var options = {
-      url: 'http://localhost:8000/kerberosio',
-      headers: {
-        'Content-Type': 'text/plain'
-      }
-    };
+    options.url = options.url + '/kerberosio';
     request.get(options, function (err, res, body) {
       expect(res.statusCode).to.equal(200);
       //Working in this way 'cause we have just 1 plugin activate
