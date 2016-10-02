@@ -17,8 +17,16 @@ var options = {
   }
 };
 
+var devicesStub;
+var filesStub;
+var noteStub;
+
 describe('Pushbullet Plugin', function () {
-  before(function () {
+  beforeEach(function () {
+    devicesStub = sinon.stub(PushBullet.prototype, 'devices').yields(null, devicesjson);
+    filesStub = sinon.stub(PushBullet.prototype, 'file').yields(null, sendfilejson);
+    noteStub = sinon.stub(PushBullet.prototype, 'note');
+
     server.listen(8000);
   });
 
@@ -33,14 +41,11 @@ describe('Pushbullet Plugin', function () {
     });
   });
 
-  it('POST Method should return 200', function (done) {
+  it('POST Method 2 devices OK', function (done) {
     var testOptions = {
       method: 'POST',
       json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
     };
-    var devicesStub = sinon.stub(PushBullet.prototype, 'devices').yields(null, devicesjson);
-    var filesStub = sinon.stub(PushBullet.prototype, 'file').yields(null, sendfilejson);
-    var noteStub = sinon.stub(PushBullet.prototype, 'note');
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
       if (err) {
@@ -50,12 +55,66 @@ describe('Pushbullet Plugin', function () {
       expect(res.body).to.equal('Call to Pushbullet sent');
       sinon.assert.calledOnce(devicesStub);
       sinon.assert.calledTwice(filesStub);
+      sinon.assert.calledWith(filesStub, "ABC", config.images_base_path + "testimage.jpg", 'Kerberos.io Motion Image');
+      sinon.assert.calledWith(filesStub, "DEF", config.images_base_path + "testimage.jpg", 'Kerberos.io Motion Image');
       sinon.assert.calledTwice(noteStub);
+      sinon.assert.calledWith(noteStub, "ABC", "WARNING: Kerberos.io Motion Detected");
+      sinon.assert.calledWith(noteStub, "DEF", "WARNING: Kerberos.io Motion Detected");
       done();
     });
   });
 
-  after(function () {
+  it('POST Method 1 device OK', function (done) {
+    var testOptions = {
+      method: 'POST',
+      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
+    };
+
+    config.device_id = "123";
+
+    var postOptions = _.extend(options, testOptions);
+    request(postOptions, function (err, res, body) {
+      if (err) {
+        console.log(err);
+      }
+      expect(res.statusCode).to.equal(200);
+      expect(res.body).to.equal('Call to Pushbullet sent');
+      sinon.assert.callCount(devicesStub, 0);
+      sinon.assert.calledOnce(filesStub);
+      sinon.assert.calledWith(filesStub, "123", config.images_base_path + "testimage.jpg", 'Kerberos.io Motion Image');
+      sinon.assert.calledOnce(noteStub);
+      sinon.assert.calledWith(noteStub, "123", "WARNING: Kerberos.io Motion Detected");
+      done();
+    });
+  });
+
+  it('POST Method 1 device with URL image OK', function (done) {
+    var testOptions = {
+      method: 'POST',
+      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
+    };
+
+    config.device_id = "123";
+    config.image_method = 'URL';
+    config.images_base_url = 'https://localhost';
+
+    var postOptions = _.extend(options, testOptions);
+    request(postOptions, function (err, res, body) {
+      if (err) {
+        console.log(err);
+      }
+      expect(res.statusCode).to.equal(200);
+      expect(res.body).to.equal('Call to Pushbullet sent');
+      sinon.assert.calledOnce(filesStub);
+      sinon.assert.calledWith(filesStub, "123", config.images_base_url + "testimage.jpg", 'Kerberos.io Motion Image');
+      done();
+    });
+  });
+
+  afterEach(function () {
+    devicesStub.restore();
+    filesStub.restore();
+    noteStub.restore();
     server.close();
   });
 });

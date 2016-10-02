@@ -10,20 +10,20 @@ function getMethod(req, res) {
 }
 
 function postMethod(req,res) {
-  pusher.devices(function(error, response) {
-    if (config.device_id !== undefined && config.device_id !== "") {
-      sendMessage(req.body, config.device_id);
-    } else {
+  if (config.device_id !== undefined && config.device_id !== "") {
+    sendMessage(req.body, config.device_id);
+  } else {
+    pusher.devices(function(error, response) {
       console.log("No device provided. Sending to all defined devices.");
       var devices = response.devices;
       devices.forEach(function(device) {
         if (device.active) {
           console.log("Sending notification to " + device.nickname);
-          sendMessage(req.body, device.device_iden);
+          sendMessage(req.body, device.iden);
         }
       });
-    }
-  });
+    });
+  }
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Call to Pushbullet sent');
 }
