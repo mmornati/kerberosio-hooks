@@ -11,7 +11,7 @@ function getMethod(req, res) {
 
 function postMethod(req,res) {
   pusher.devices(function(error, response) {
-    if (config.device_id !== undefined) {
+    if (config.device_id !== undefined && config.device_id !== "") {
       sendMessage(req.body, config.device_id);
     } else {
       console.log("No device provided. Sending to all defined devices.");

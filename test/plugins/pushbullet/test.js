@@ -1,8 +1,14 @@
 var server = require('../../../lib/server.js');
+var config = require('config');
 var request = require('request');
 var chai = require('chai');
 var expect = chai.expect;
 var _ = require('underscore');
+var sinon = require('sinon');
+var PushBullet = require('pushbullet');
+
+var devicesjson = require('./devices.json');
+var sendfilejson = require('./sendfile.json');
 
 var options = {
   url: 'http://localhost:8000/pushbullet',
@@ -32,6 +38,9 @@ describe('Pushbullet Plugin', function () {
       method: 'POST',
       json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
     };
+    var devicesStub = sinon.stub(PushBullet.prototype, 'devices').yields(null, devicesjson);
+    var filesStub = sinon.stub(PushBullet.prototype, 'file').yields(null, sendfilejson);
+    var noteStub = sinon.stub(PushBullet.prototype, 'note');
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
       if (err) {
@@ -39,6 +48,9 @@ describe('Pushbullet Plugin', function () {
       }
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.equal('Call to Pushbullet sent');
+      sinon.assert.calledOnce(devicesStub);
+      sinon.assert.calledTwice(filesStub);
+      sinon.assert.calledTwice(noteStub);
       done();
     });
   });
