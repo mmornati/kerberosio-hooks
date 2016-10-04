@@ -16,12 +16,7 @@ function getMethod(req, res) {
 function postMethod(req,res) {
   var receivedData = JSON.parse(req.body);
   var data = EmailConfig.getPluginConfig().data;
-  var image_to_send;
-  if (config.image_method == 'URL') {
-    image_to_send = config.images_base_url + receivedData.pathToImage;
-  } else if (config.image_method == 'PATH') {
-    image_to_send = config.images_base_path + receivedData.pathToImage;
-  }
+  var image_to_send = EmailConfig.getImageUrl(config, receivedData.pathToImage);
 
   data.attachments = [];
   data.attachments.push({
