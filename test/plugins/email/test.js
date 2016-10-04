@@ -82,7 +82,7 @@ describe('Email Plugin', function () {
   it('POST Method mail sent OK', function (done) {
     var testOptions = {
       method: 'POST',
-      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
+      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.png","instanceName":"home"}
     };
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
