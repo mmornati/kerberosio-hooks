@@ -7,8 +7,6 @@ var PushBulletConfig = new pluginConfig();
 var pusher = new PushBullet(PushBulletConfig.getPluginConfig().pushbullet_key);
 var moment = require('moment');
 
-
-
 function getMethod(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('GET call for ' + PushBulletConfig.getName() + ' is not supported. Use POST instead');
