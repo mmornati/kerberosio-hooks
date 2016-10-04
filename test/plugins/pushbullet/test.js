@@ -17,6 +17,11 @@ var options = {
   }
 };
 
+var testOptions = {
+  method: 'POST',
+  json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.jpg","instanceName":"home"}
+};
+
 var devicesStub;
 var filesStub;
 var noteStub;
@@ -42,10 +47,6 @@ describe('Pushbullet Plugin', function () {
   });
 
   it('POST Method 2 devices OK', function (done) {
-    var testOptions = {
-      method: 'POST',
-      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.png","instanceName":"home"}
-    };
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
       if (err) {
@@ -65,11 +66,6 @@ describe('Pushbullet Plugin', function () {
   });
 
   it('POST Method 1 device OK', function (done) {
-    var testOptions = {
-      method: 'POST',
-      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.png","instanceName":"home"}
-    };
-
     config.plugins.pushbullet.device_id = "123";
 
     var postOptions = _.extend(options, testOptions);
@@ -89,10 +85,6 @@ describe('Pushbullet Plugin', function () {
   });
 
   it('POST Method 1 device with URL image OK', function (done) {
-    var testOptions = {
-      method: 'POST',
-      json: {"regionCoordinates":[555,438,578,476],"numberOfChanges":26,"timestamp":"1474833997","microseconds":"6-875999","token":994,"pathToImage":"testimage.png","instanceName":"home"}
-    };
 
     config.plugins.pushbullet.device_id = "123";
     config.image_method = 'URL';
