@@ -15,16 +15,20 @@
     "http": "0.0.0",
     "httpdispatcher": "^1.0.0",
     "moment": "~2.15.1",
+    "nodemailer": "^2.6.4",
+    "nodemailer-smtp-transport": "^2.7.2",
     "pushbullet": "^1.4.3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.3.3",
+    "crypto": "0.0.3",
     "istanbul": "^0.4.5",
     "jshint": "^2.9.3",
     "mocha-jshint": "^2.3.1",
     "request": "^2.75.0",
-    "sinon": "^1.17.6"
+    "sinon": "^1.17.6",
+    "smtp-server": "^1.15.0"
   }
 }

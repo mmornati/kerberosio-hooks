@@ -28,7 +28,7 @@ describe('Base Server', function () {
     request.get(options, function (err, res, body) {
       expect(res.statusCode).to.equal(200);
       //Working in this way 'cause we have just 1 plugin activate
-      expect(res.body).to.equal('GET call for PushuBullet is not supported. Use POST instead');
+      expect(res.body).to.equal('GET call for PushBullet is not supported. Use POST instead');
       done();
     });
   });

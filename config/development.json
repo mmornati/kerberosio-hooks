@@ -1,4 +1,25 @@
 {
   "images_base_path": "./test/",
-  "image_method": "PATH"
+  "image_method": "PATH",
+  "plugins": {
+    "email": {
+      "smtp_config": {
+          "host": "localhost",
+          "port": 8010,
+          "logger": false,
+          "debug": true,
+          "auth": {
+              "user": "testuser",
+              "pass": "testpass"
+          },
+          "ignoreTLS": true
+        },
+        "data": {
+          "from": "user@valid.sender",
+          "to": ["user@valid.recipient"],
+          "subject": "WARNING: Kerberos.io Motion Detected",
+          "text": "A movement was detected by your camera. Check the attachment for more details."
+        }
+    }
+  }
 }

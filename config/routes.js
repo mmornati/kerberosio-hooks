@@ -6,23 +6,20 @@ var routes = {"GET": {}, "POST": {}};
 var globalMethods = {"GET": [], "POST": []};
 console.log("Configuring " + config.activated_plugins.length + " plugins...");
 for (var i=0; i<config.activated_plugins.length; i++) {
-  var current_module_config = require(pluginsFolder + config.activated_plugins[i] + "/config.js");
-  if (current_module_config.pluginConfig.name === undefined) {
+  var current_module_config_file = require(pluginsFolder + config.activated_plugins[i] + "/config.js");
+  var current_module_config = new current_module_config_file();
+  if (current_module_config.getName() === undefined) {
     console.error('Plugin ' + config.activated_plugins[i] + ' not correctly configured');
     continue;
   }
-  var current_module = require(pluginsFolder + config.activated_plugins[i] + "/routes.js");
-  if (current_module === undefined || current_module.routes === undefined) {
-    throw new Error('Missing routes for ' + config.activated_plugins[i] + ' plugin');
-  }
-  for (var j=0; j<current_module.routes.length; j++) {
-    if (routes[current_module.routes[j].type] !== undefined) {
-        routes[current_module.routes[j].type][current_module.routes[j].url] = current_module.routes[j].code;
-        globalMethods[current_module.routes[j].type].push(current_module.routes[j].code);
-    } else {
-      console.log("Unsupported method " + current_module.routes[j].type + "for module " + activated_plugins[i]);
-    }
-  }
+  var current_module_routes_file = require(pluginsFolder + config.activated_plugins[i] + "/routes.js");
+  var current_module = new current_module_routes_file();
+
+  routes.GET[current_module.getUrl()] = current_module.getGetCode();
+  routes.POST[current_module.getUrl()] = current_module.getPostCode();
+
+  globalMethods.GET.push(current_module.getGetCode());
+  globalMethods.POST.push(current_module.getPostCode());
 }
 
 //Adding base path to call all active plugins
