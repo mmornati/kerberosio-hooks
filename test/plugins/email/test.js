@@ -20,7 +20,8 @@ var nmtransport, emailStub;
 var smtpServer;
 
 function manageAddValidation(regex, address, session, callback) {
-    if (!/regex/.test(address.address)) {
+    var re = new RegExp(regex);
+    if (!re.test(address.address)) {
         return callback(new Error('Only ' + regex + ' is allowed.'));
     }
     return callback(); // Accept the address
