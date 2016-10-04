@@ -6,6 +6,8 @@ var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
 var nodemailer = require('nodemailer');
+var SMTPServer = require('smtp-server').SMTPServer;
+var crypto = require('crypto');
 
 var options = {
   url: 'http://localhost:8000/email',
@@ -14,9 +16,55 @@ var options = {
   }
 };
 
+var nmtransport, emailStub;
+var smtpServer;
+
 describe('Email Plugin', function () {
-  beforeEach(function () {
-    var emailStub = sinon.stub(nodemailer.prototype, 'createTransport');
+  beforeEach(function (done) {
+    smtpServer = new SMTPServer({
+        authMethods: ['PLAIN', 'XOAUTH2'],
+        disabledCommands: ['STARTTLS'],
+
+        onData: function (stream, session, callback) {
+          var hash = crypto.createHash('md5');
+          stream.on('data', function (chunk) {
+              hash.update(chunk);
+          });
+          stream.on('end', function () {
+              callback(null, hash.digest('hex'));
+          });
+        },
+
+        onAuth: function (auth, session, callback) {
+            if (auth.username !== 'testuser' || auth.password !== 'testpass') {
+                return callback(null, {
+                    data: {
+                        status: '401',
+                        schemes: 'bearer mac',
+                        scope: 'my_smtp_access_scope_name'
+                    }
+                });
+            }
+            callback(null, {
+                user: 123
+            });
+        },
+        onMailFrom: function (address, session, callback) {
+            if (!/@valid.sender/.test(address.address)) {
+                return callback(new Error('Only user@valid.sender is allowed to send mail'));
+            }
+            return callback(); // Accept the address
+        },
+        onRcptTo: function (address, session, callback) {
+            if (!/@valid.recipient/.test(address.address)) {
+                return callback(new Error('Only user@valid.recipient is allowed to receive mail'));
+            }
+            return callback(); // Accept the address
+        },
+        logger: false
+    });
+
+    smtpServer.listen(8010, done);
     server.listen(8000);
   });
 
@@ -38,9 +86,6 @@ describe('Email Plugin', function () {
     };
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
-      if (err) {
-        console.log(err);
-      }
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.equal('Email sent OK');
       done();
@@ -48,7 +93,8 @@ describe('Email Plugin', function () {
   });
 
 
-  afterEach(function () {
+  afterEach(function (done) {
+    smtpServer.close(done);
     server.close();
   });
 });

@@ -6,7 +6,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var EmailConfig = new pluginConfig();
 
-var transporter = nodemailer.createTransport(EmailConfig.getPluginConfig().smtp);
+var transporter = nodemailer.createTransport(EmailConfig.getPluginConfig().smtp_config);
 
 function getMethod(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -31,10 +31,13 @@ function postMethod(req,res) {
   transporter.sendMail(data, function(err, info) {
     if (err) {
       console.log(err);
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end("Error sending the email");
+    } else {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end('Email sent OK');
     }
   });
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Email sent OK');
 }
 
 module.exports.get = getMethod;

@@ -11,7 +11,7 @@
 
   "plugins": {
     "email": {
-      "smtp": "smtps://user%40gmail.com:pass@smtp.gmail.com",
+      "smtp_config": "smtps://user%40gmail.com:pass@smtp.gmail.com",
       "data": {
         "from": "sender@server.com",
         "to": ["receiver@sender.com"],
