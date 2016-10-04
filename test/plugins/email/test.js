@@ -19,6 +19,13 @@ var options = {
 var nmtransport, emailStub;
 var smtpServer;
 
+function manageAddValidation(regex, address, session, callback) {
+    if (!/regex/.test(address.address)) {
+        return callback(new Error('Only ' + regex + ' is allowed.'));
+    }
+    return callback(); // Accept the address
+}
+
 describe('Email Plugin', function () {
   beforeEach(function (done) {
     smtpServer = new SMTPServer({
@@ -50,16 +57,10 @@ describe('Email Plugin', function () {
             });
         },
         onMailFrom: function (address, session, callback) {
-            if (!/@valid.sender/.test(address.address)) {
-                return callback(new Error('Only user@valid.sender is allowed to send mail'));
-            }
-            return callback(); // Accept the address
+          return manageAddValidation("@valid.sender", address, session, callback);
         },
         onRcptTo: function (address, session, callback) {
-            if (!/@valid.recipient/.test(address.address)) {
-                return callback(new Error('Only user@valid.recipient is allowed to receive mail'));
-            }
-            return callback(); // Accept the address
+          return manageAddValidation("@valid.recipient", address, session, callback);
         },
         logger: false
     });
@@ -86,6 +87,9 @@ describe('Email Plugin', function () {
     };
     var postOptions = _.extend(options, testOptions);
     request(postOptions, function (err, res, body) {
+      if (err) {
+        console.log(err);
+      }
       expect(res.statusCode).to.equal(200);
       expect(res.body).to.equal('Email sent OK');
       done();
