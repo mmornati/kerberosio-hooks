@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "codeclimate-test-reporter": "^0.3.3",
+    "codeclimate-test-reporter": "^0.4.0",
     "crypto": "0.0.3",
     "istanbul": "^0.4.5",
     "jshint": "^2.9.3",
