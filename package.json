@@ -17,7 +17,7 @@
     "moment": "~2.17.1",
     "nodemailer": "^3.0.0",
     "nodemailer-smtp-transport": "^2.7.2",
-    "pushbullet": "^1.4.3",
+    "pushbullet": "^2.0.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
