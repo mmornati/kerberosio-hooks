@@ -3,6 +3,17 @@
 # kerberosio-hooks
 Kerberos.io WebHooks extensible module to be notified where you need if anything happens on you Kerberosio
 
+## Requirements
+To use this script you need a recent version of NodeJS (the 0.10.X is not supported). I suggest you to use the latest LTS version.
+To install it on your RPi the easy way is using NVM (Node Version Manager https://github.com/creationix/nvm)
+
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+nvm install --lts
+nvm alias default <the lts version installed>
+nvm use default
+```
+
 ## Installation
 Clone the project on your system:
 
@@ -76,4 +87,3 @@ Then you can simply use (and configure) the sample init.d script placed in the r
 sudo cp webhook-init-d /etc/init.d/webhook
 sudo /etc/init.d/webhook start
 ```
-
