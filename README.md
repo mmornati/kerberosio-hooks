@@ -1,8 +1,7 @@
-[![Build Status](https://travis-ci.org/mmornati/kerberosio-hooks.svg?branch=master)](https://travis-ci.org/mmornati/kerberosio-hooks) [![Code Climate](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/gpa.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks) [![Test Coverage](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/coverage.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks/coverage) [![Issue Count](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/issue_count.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks)
+[![Greenkeeper badge](https://badges.greenkeeper.io/mmornati/kerberosio-hooks.svg)](https://greenkeeper.io/)[![Build Status](https://travis-ci.org/mmornati/kerberosio-hooks.svg?branch=master)](https://travis-ci.org/mmornati/kerberosio-hooks) [![Code Climate](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/gpa.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks) [![Test Coverage](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/coverage.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks/coverage) [![Issue Count](https://codeclimate.com/github/mmornati/kerberosio-hooks/badges/issue_count.svg)](https://codeclimate.com/github/mmornati/kerberosio-hooks)
 
 # kerberosio-hooks
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/mmornati/kerberosio-hooks.svg)](https://greenkeeper.io/)
 Kerberos.io WebHooks extensible module to be notified where you need if anything happens on you Kerberosio
 
 ## Requirements
