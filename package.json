@@ -27,7 +27,7 @@
     "istanbul": "^0.4.5",
     "jshint": "^2.9.3",
     "mocha-jshint": "^2.3.1",
-    "request": "^2.79.0",
+    "request": "2.83.0",
     "sinon": "^4.0.0",
     "smtp-server": "^3.0.1"
   }
