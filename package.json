@@ -14,7 +14,7 @@
     "date-utils": "^1.2.21",
     "http": "0.0.0",
     "httpdispatcher": "^2.0.1",
-    "moment": "~2.20.0",
+    "moment": "~2.22.1",
     "nodemailer": "^4.0.0",
     "nodemailer-smtp-transport": "^2.7.3",
     "pushbullet": "^2.0.0",
