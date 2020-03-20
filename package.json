@@ -15,7 +15,7 @@
     "http": "0.0.0",
     "httpdispatcher": "^2.0.1",
     "moment": "~2.20.0",
-    "nodemailer": "^4.0.0",
+    "nodemailer": "^6.4.6",
     "nodemailer-smtp-transport": "^2.7.3",
     "pushbullet": "^2.0.0",
     "underscore": "^1.8.3"
